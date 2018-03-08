@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+         <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Laravel</title>
 
@@ -14,6 +16,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <script src="//code.jquery.com/jquery.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+         <!-- Scripts -->
+  <script src="/js/app.js" type="text/javascript" charset="utf-8" async defer></script>
 
         <!-- Styles -->
         <!-- <style>
@@ -121,12 +125,14 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="mycart">Cart <span class="badge">{{ $products->count()}}</span></a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{Auth::user()->name}} <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{Auth::user()->name}}  <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Action</a></li>
                         <li><a href="#">Another action</a></li>
                         <li><a href="#">Something else here</a></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="{{ route('logout') }}">
+                                            Logout
+                                        </a></li>
                     </ul>
                 </li>
             </ul>
@@ -163,54 +169,56 @@
 
 
 
-    <div class="col-md-12">
+     <div class="col-md-12">
        <div class="row">
     <div class="col-md-offset-1 col-md-10">
-        
-   
-
+     <div class="panel panel-danger">  
+      <div class="panel-body">  
+<table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sr.No,</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+<?php $total = 0; ?>
     @foreach($products as $product)
 
- 
-                                   <!--  <div class="col-md-3">
-                        <div class="thumbnail">
-                            <div class="caption text-center">
-                                <a href="http://cartdemo.andredemos.ca/shop/playstation-4"><img src="products\{{$product->image}}" alt="product" class="img-responsive"></a>
-                                <a href="http://cartdemo.andredemos.ca/shop/playstation-4"><h3>{{$product->name}}</h3>
-                                <p>{{$product->price}}$</p>
-                                </a>
-                                <div class="panel  ">
-                                 <div class="btn btn-info btn-sm pull-left">
-                                    Add To Wishlist
-                                    </div>
-                                      <form class="form-horizontal" method="POST" action="{{ route('addtocart') }}">
-                                     {{ csrf_field() }}
+    <?php $total += $product->price; ?>
 
-                                     <input type="hidden" name="product_id" value="{{$product->id}}">
-                                      <input type="hidden" name="name" value="{{$product->name}}">
-                                       <input type="hidden" name="user_id" value="{{Auth::id()}}">
-                                       <input type="hidden" name="price" value="{{$product->price}}">
-                                       <input type="hidden" name="quantity" value="{{1}}">
-
-                                    <button type="submit" class="btn btn-success btn-sm pull-right">Add To cart</button> 
-                                    
-                                    
-                                </form>
-                                    </div>
-                            </div> --> <!-- end caption -->
-                             
-                                   
-
-                         
-                        <!-- </div> --> <!-- end thumbnail -->
-                    <!-- </div> --> <!-- end col-md-3 -->
-
-{{$product->name}}
-
+                      <tbody>
+                            <tr>
+                                <td scope="row">{{$product->id}}</td>
+                                <td>{{$product->name}}</td>
+                                <td>{{$product->quantity}}</td>
+                                <td>{{$product->price}}</td>
+                                <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+                                           <i class="fa fa-trash" aria-hidden="true">&times</i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    
 @endforeach      
+</table>
+</div>
+
+ <div class="panel panel-footer">{{$total}}</div>
+
+</div>
+
+ 
+
+ 
+
                      </div>
 
-                   
+                     
+
+      
  </div>
  </div> 
     </body>

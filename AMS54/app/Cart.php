@@ -11,9 +11,16 @@ class Cart extends Model
     ];
 
 
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany(App\User::class);
     }
+
+
+    public function product()
+    {
+        return $this->belongsToMany(Product::class,'product_id');
+    }
+
 
 }

@@ -123,7 +123,7 @@
                 <li><a href="mycart">Cart <span class="badge">{{ $user->count()}}</span></a></li>
                 @endif
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{Auth::user()->name}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Action</a></li>
                         <li><a href="#">Another action</a></li>
@@ -205,9 +205,15 @@
                         </div> <!-- end thumbnail -->
                     </div> <!-- end col-md-3 -->
 @endforeach      
+                    
+
+
+
                      </div>
 
-                     {{$products->links()}}
+                     
+
+
  </div>
  </div> 
     </body>

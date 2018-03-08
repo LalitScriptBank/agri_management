@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+ 
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -28,14 +29,11 @@ class User extends Authenticatable
     ];
 
     
-    public function carts()
-    {
-        return $this->hasOne('App\Cart');
-    }
+    
 
-     public function cart()
+     public function carts()
     {
-        return $this->hasOne('App\Cart');
+        return $this->hasMany(Cart::class);
     }
 
 }

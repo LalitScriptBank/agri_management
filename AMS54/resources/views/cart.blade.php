@@ -120,7 +120,7 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::check())
-                <li><a href="#">Cart {{ $user->count()}}</a></li>
+                <li><a href="mycart">Cart <span class="badge">{{ $user->count()}}</span></a></li>
                 @endif
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
